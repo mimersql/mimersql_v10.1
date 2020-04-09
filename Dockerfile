@@ -1,6 +1,5 @@
 FROM debian:latest
 CMD ["bash"]
-#ADD mimersql1014_10.1.4F-27325_amd64.deb /mimersql/mimersql1014_10.1.4F-27325_amd64.deb
 WORKDIR /mimersql
 RUN apt-get update \
     && apt-get install -y zenity systemd xinetd wget

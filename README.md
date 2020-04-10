@@ -35,10 +35,11 @@ Since this is a permanent database, we strongly recommend changing the password 
 `docker ps -l -q` -- this provides a 12 digits hexadecimal number, e.g., `9bee88caa0ac`
 
 1. Copy the database to the local filesystem using this ID
-`docker cp 9bee88caa0ac:/usr/local/MimerSQL/mimerdb .`
+`docker cp <container ID>:/usr/local/MimerSQL/mimerdb .`
 
-1. Kill the seeding container
-`docker kill 9bee88caa0ac`
+1. Kill and remove the seeding container
+`docker kill <container ID>`
+`docker rm <container ID>`
 
 1. Start a new container, this time mapping the host local database into the container, thus replacing it
 `docker run -v $(PWD)/mimerdb:/usr/local/MimerSQL/mimerdb -p 1360:1360 -d mimersql/mimersql_v10.1:latest`

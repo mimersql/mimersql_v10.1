@@ -41,7 +41,7 @@ Since this is a permanent database, we strongly recommend changing the password 
 `docker kill 9bee88caa0ac`
 
 1. Start a new container, this time mapping the host local database into the container, thus replacing it
-`docker run -v mimerdb:/usr/local/MimerSQL/mimerdb -p 1360:1360 -d mimersql/mimersql_v10.1:latest`
+`docker run -v $(PWD)/mimerdb:/usr/local/MimerSQL/mimerdb -p 1360:1360 -d mimersql/mimersql_v10.1:latest`
 
 ## Acknowledgements
 Oscar Armer, Savant, for the inspiration.

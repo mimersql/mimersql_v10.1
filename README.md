@@ -4,7 +4,8 @@ This is a docker build of Mimer SQL version 10.1. It comes with a ten user licen
 
 ## Running Mimer
 Run the container with
-`docker run -p 1360:1360 -d mimersql/mimersql_v10.1:latest`
+
+```docker run -p 1360:1360 -d mimersql/mimersql_v10.1:latest```
 
 This launches a Mimer SQL database server that is accessible on port 1360, the standard port for Mimer SQL.
 
@@ -21,7 +22,7 @@ Since the container is a separate entity, the above solution will lose all data 
 1. Start a fresh copy of the Mimer SQL container, which will create an emtpy database
 1. Copy the empty database from the conainer to the host file system
 1. Kill the container
-1. Start a new conatiner with Mimer SQL, only to this time replace the container's path to the database with a mapping to the host file system.
+1. Start a new container with Mimer SQL, only to this time replace the container's path to the database with a mapping to the host file system instead.
 
 This way, when the container is killed, all data resides in the persistent host file system and can be accessed when  a new container is launched that is mapped to this path.
 
@@ -29,20 +30,20 @@ Since this results in a persisten database we strongly recommend changing the pa
 
 ### Procedure
 1. Create a fresh database using a seeding container
-`docker run -d mimersql/mimersql_v10.1:latest`
+- `docker run -d mimersql/mimersql_v10.1:latest`
 
-1. Find the ID of this container (a 12 digit hexadecimal number)
-`docker ps -l -q`
+2. Find the ID of this container (a 12 digit hexadecimal number)
+- `docker ps -l -q`
 
-1. Copy the database from the container to the local filesystem using this ID
-`docker cp <container ID>:/usr/local/MimerSQL/mimerdb .`
+3. Copy the database from the container to the local filesystem using this ID
+- `docker cp <container ID>:/usr/local/MimerSQL/mimerdb .`
 
-1. Kill and remove the seeding container
-`docker kill <container ID>`
-`docker rm <container ID>`
+4. Kill and remove the seeding container
+- `docker kill <container ID>`  
+- `docker rm <container ID>`
 
-1. Start a new container, this time mapping the host local database into the container, thus replacing the one installed by default in the image
-`docker run -v $(PWD)/mimerdb:/usr/local/MimerSQL/mimerdb -p 1360:1360 -d mimersql/mimersql_v10.1:latest`
+5. Start a new container, this time mapping the host local database into the container, thus replacing the one installed by default in the image
+- `docker run -v $(PWD)/mimerdb:/usr/local/MimerSQL/mimerdb -p 1360:1360 -d mimersql/mimersql_v10.1:latest`
 
 ## Acknowledgements
 Oscar Armer, Savant, for the inspiration.

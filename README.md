@@ -30,20 +30,20 @@ Since this results in a persisten database we strongly recommend changing the pa
 
 ### Procedure
 1. Create a fresh database using a seeding container
-- `docker run -d mimersql/mimersql_v10.1:latest`
+    - `docker run -d mimersql/mimersql_v10.1:latest`
 
 2. Find the ID of this container (a 12 digit hexadecimal number)
-- `docker ps -l -q`
+    - `docker ps -l -q`
 
 3. Copy the database from the container to the local filesystem using this ID
-- `docker cp <container ID>:/usr/local/MimerSQL/mimerdb .`
+    - `docker cp <container ID>:/usr/local/MimerSQL/mimerdb .`
 
 4. Kill and remove the seeding container
-- `docker kill <container ID>`  
-- `docker rm <container ID>`
+    - `docker kill <container ID>`  
+    - `docker rm <container ID>`
 
 5. Start a new container, this time mapping the host local database into the container, thus replacing the one installed by default in the image
-- `docker run -v $(PWD)/mimerdb:/usr/local/MimerSQL/mimerdb -p 1360:1360 -d mimersql/mimersql_v10.1:latest`
+    - `docker run -v $(PWD)/mimerdb:/usr/local/MimerSQL/mimerdb -p 1360:1360 -d mimersql/mimersql_v10.1:latest`
 
 ## Acknowledgements
 Oscar Armer, Savant, for the inspiration.

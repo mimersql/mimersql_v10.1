@@ -45,5 +45,7 @@ Since this results in a persisten database we strongly recommend changing the pa
 5. Start a new container, this time mapping the host local database into the container, thus replacing the one installed by default in the image
     - `docker run -v $(PWD)/mimerdb:/usr/local/MimerSQL/mimerdb -p 1360:1360 -d mimersql/mimersql_v10.1:latest`
 
+6. Remember to shut down the container with `docker stop` and not `docker kill` in order to allow Mimer to close the database orderly. If the container is stopped with `docker kill` it will force a DBCHK on the next start.
+
 ## Acknowledgements
 Oscar Armer, Savant, for the inspiration.

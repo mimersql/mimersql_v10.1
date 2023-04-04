@@ -2,15 +2,16 @@
 FROM debian:latest
 
 # update and install necessary utilities
-RUN apt-get update \
-    && apt-get install -y zenity systemd xinetd wget
+RUN apt-get update && \
+    apt-get install -y sudo file procps systemd xinetd wget && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # set the name of the package
-ENV debfile mimersql1014_10.1.4F-27325_amd64.deb
+ENV debfile mimersql1016_10.1.6D-36610_amd64.deb
 
 # fetch the package and install it
-RUN wget http://ftp.mimer.com/pub/dist/linux_x64/${debfile}
-RUN dpkg -i ${debfile}
+RUN wget https://download.mimer.com/pub/dist/linux_x64/${debfile} && \
+    dpkg --ignore-depends=zenity  --install ${debfile}
 
 # create a new, empty database
 RUN dbinstall -dil -u root mimerdb SYSADM /usr/local/MimerSQL
